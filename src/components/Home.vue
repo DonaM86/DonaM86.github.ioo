@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <h2>{{ title }}</h2>
@@ -19,8 +18,8 @@
       <option value="Starter">Förrätt</option>
       <option value="Vegetarian">Vegetarisk</option>
     </select>
-  <!-- Sök"-knappen, triggas funktionen "search" i Vue-instansen, vilket hämtar receptdata från databasen och
-                                                visar resultaten i en div som endast visas om det finns resultat. -->
+    <!-- Sök"-knappen, triggas funktionen "search" i Vue-instansen, vilket hämtar receptdata från databasen och
+                                                  visar resultaten i en div som endast visas om det finns resultat. -->
     <button @click="search">Sök</button>
     <div v-if="results && results.length">
       <div v-for="result in results" class="result-item">
@@ -28,28 +27,30 @@
         <img v-if="result.strMealThumb" :src="result.strMealThumb" alt="Foto på mat">
         <p>{{ result.strInstructions }}</p>
 
-      <!-- Spara som favorit"-knappen, triggas "saveToFavorites"-metoden som tar emot matreceptet som en parameter och
-                                                      lägger till det i en array med favoritrecept -->
+        <!-- Spara som favorit"-knappen, triggas "saveToFavorites"-metoden som tar emot matreceptet som en parameter och
+                                                        lägger till det i en array med favoritrecept -->
         <button @click="saveToFavorites(result)" class="favorite-button">Spara som favorit</button>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  props: {
+    titleProp: {
+      type: String,
+      default: "Sök dina recept här"
+    }
+  },
   data() {
     return {
       query: "",
       category: "",
       results: [],
-      title: "Sök dina recept här"
+      title: this.titleProp
     };
   },
-
-
   methods: {
     async search() {
       console.log("Searching for recipes...");
@@ -69,6 +70,7 @@ export default {
         }
       } catch (error) {
         console.error(error);
+
 
       }
     },
