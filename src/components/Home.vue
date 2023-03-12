@@ -18,8 +18,8 @@
       <option value="Starter">Förrätt</option>
       <option value="Vegetarian">Vegetarisk</option>
     </select>
-    <!-- Sök"-knappen, triggas funktionen "search" i Vue-instansen, vilket hämtar receptdata från databasen och
-                                                  visar resultaten i en div som endast visas om det finns resultat. -->
+    <!-- Sök"-knappen, triggar "search"  vilket hämtar recept från databasen och
+    visar resultaten i en div som endast visas om det finns resultat. -->
     <button @click="search">Sök</button>
     <div v-if="results && results.length">
       <div v-for="result in results" class="result-item">
@@ -27,8 +27,8 @@
         <img v-if="result.strMealThumb" :src="result.strMealThumb" alt="Foto på mat">
         <p>{{ result.strInstructions }}</p>
 
-        <!-- Spara som favorit"-knappen, triggas "saveToFavorites"-metoden som tar emot matreceptet som en parameter och
-                                                        lägger till det i en array med favoritrecept -->
+        <!-- Spara som favorit"-knappen, triggar "saveToFavorites"-metoden som tar emot receptet som en parameter och
+      lägger till det i en array med favoritrecept -->
         <button @click="saveToFavorites(result)" class="favorite-button">Spara som favorit</button>
       </div>
     </div>
@@ -74,7 +74,7 @@ export default {
 
       }
     },
-    // metoden används för att spara ett matrecept som favorit genom att lagra det i webbläsarens cacheminne (localStorage).
+    // metoden används för att spara ett recept som favorit genom att lagra det i  localStorage.
     saveToFavorites(recipe) {
       let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
       favorites.push(recipe);
