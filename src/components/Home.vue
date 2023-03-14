@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2>{{ title }}</h2>
+    <Title :title="pageTitle" />
+
     <!-- https://www.youtube.com/watch?v=yI3yKamH34g -->
     <!-- sökbar med kategorier, -->
     <input type="text" v-model="query" placeholder="Sök efter ingredienser..." id="search-bar" />
@@ -36,21 +37,23 @@
 </template>
 
 <script>
+import Title from '../components/Title.vue'
+
+
 export default {
-  props: {
-    titleProp: {
-      type: String,
-      default: "Sök dina recept här"
-    }
+  name: 'Home',
+  components: {
+    Title
   },
   data() {
     return {
-      query: "",
-      category: "",
-      results: [],
-      title: this.titleProp
-    };
+      pageTitle: 'Sök dina recept här:',
+      query: '',
+      category: '',
+      results: null
+    }
   },
+
   methods: {
     async search() {
       console.log("Searching for recipes...");
